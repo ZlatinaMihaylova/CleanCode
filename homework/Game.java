@@ -1,4 +1,4 @@
-package homework;
+package main.homework;
 
 public final class Game {
 
@@ -17,26 +17,28 @@ public final class Game {
         this.player2 = player2;
     }
 
-    private String getScore(){
+    private String getResult(){
         if (this.checkForWinning()){
             return Game.WINNING_ANNOTATION + this.getLeadingPlayer().getName();
         }
-
         if (this.checkForAdvantage()){
             return Game.ADVANTAGE_ANNOTATION + this.getLeadingPlayer().getName();
         }
+        if (this.arePointsEquals()) {
+            return this.getEqualPointsResult();
+        }
+        return this.player1.getResult() + Game.SEPARATOR + this.player2.getResult();
+    }
 
-        if (this.player1.getPoints() == this.player2.getPoints() ) {
-            if ( this.player1.getPoints() < Game.POINTS_FOR_DEUCE){
-                return this.player1.getResult() + Game.ALL_ANNOTATION;
-            }
-            else{
-                return Game.DEUCE_ANNOTATION;
-            }
+    private String getEqualPointsResult(){
+        if ( this.player1.getPoints() < Game.POINTS_FOR_DEUCE){
+            return this.player1.getResult() + Game.ALL_ANNOTATION;
         }
-        else{
-            return this.player1.getResult() + Game.SEPARATOR + this.player2.getResult();
-        }
+        return Game.DEUCE_ANNOTATION;
+    }
+
+    private boolean arePointsEquals(){
+        return this.player1.getPoints() == this.player2.getPoints();
     }
 
     private boolean checkForAdvantage(){
@@ -50,7 +52,7 @@ public final class Game {
     }
 
     private Player getLeadingPlayer(){
-        if ( this.player1.getPoints() > this.player2.getPoints()){
+        if ( this.player1.hasMorePoints(this.player2)){
             return this.player1;
         }
         return this.player2;
@@ -63,6 +65,6 @@ public final class Game {
         player1.increasePointsAndResult();
         player2.increasePointsAndResult();
         player2.increasePointsAndResult();
-        System.out.println(game.getScore());
+        System.out.println(game.getResult());
     }
 }

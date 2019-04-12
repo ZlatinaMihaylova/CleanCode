@@ -9,13 +9,13 @@ public final class Player {
     private static final int WINNING_POINTS = 4;
 
     private final String name;
-    private String result;
     private int points;
+    private String result;
 
     public Player(String name) {
         this.name = name;
-        this.result = new String();
         this.points = Player.BEGINNING_POINTS;
+        this.result = new String();
     }
 
     void increasePointsAndResult(){

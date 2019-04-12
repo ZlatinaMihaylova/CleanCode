@@ -9,12 +9,12 @@ public final class Game {
     private static final String SEPARATOR = "-";
     public static final int POINTS_FOR_DEUCE = 3;
 
-    private final Player player1;
-    private final Player player2;
+    private final Player firstPlayer;
+    private final Player secondPlayer;
 
-    private Game(Player player1,Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
+    private Game(Player firstPlayer,Player secondPlayer) {
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = secondPlayer;
     }
 
     private String getResult(){
@@ -27,44 +27,44 @@ public final class Game {
         if (this.arePointsEquals()) {
             return this.getEqualPointsResult();
         }
-        return this.player1.getResult() + Game.SEPARATOR + this.player2.getResult();
+        return this.firstPlayer.getResult() + Game.SEPARATOR + this.secondPlayer.getResult();
     }
 
     private String getEqualPointsResult(){
-        if ( this.player1.getPoints() < Game.POINTS_FOR_DEUCE){
-            return this.player1.getResult() + Game.ALL_ANNOTATION;
+        if ( this.firstPlayer.getPoints() < Game.POINTS_FOR_DEUCE){
+            return this.firstPlayer.getResult() + Game.ALL_ANNOTATION;
         }
         return Game.DEUCE_ANNOTATION;
     }
 
     private boolean arePointsEquals(){
-        return this.player1.getPoints() == this.player2.getPoints();
+        return this.firstPlayer.getPoints() == this.secondPlayer.getPoints();
     }
 
     private boolean checkForAdvantage(){
-        return this.player1.hasAdvantage(this.player2)
-                || this.player2.hasAdvantage(this.player1);
+        return this.firstPlayer.hasAdvantage(this.secondPlayer)
+                || this.secondPlayer.hasAdvantage(this.firstPlayer);
     }
 
     private boolean checkForWinning(){
-        return this.player1.isWinning(this.player2)
-                || this.player2.isWinning(this.player1);
+        return this.firstPlayer.isWinning(this.secondPlayer)
+                || this.secondPlayer.isWinning(this.firstPlayer);
     }
 
     private Player getLeadingPlayer(){
-        if ( this.player1.hasMorePoints(this.player2)){
-            return this.player1;
+        if ( this.firstPlayer.hasMorePoints(this.secondPlayer)){
+            return this.firstPlayer;
         }
-        return this.player2;
+        return this.secondPlayer;
     }
 
     public static void main(String[] args) {
-        Player player1 = new Player("player1");
-        Player player2 = new Player("player2");
-        Game game = new Game(player1, player2);
-        player1.increasePointsAndResult();
-        player2.increasePointsAndResult();
-        player2.increasePointsAndResult();
+        Player firstPlayer = new Player("firstPlayer");
+        Player secondPlayer = new Player("secondPlayer");
+        Game game = new Game(firstPlayer, secondPlayer);
+        firstPlayer.increasePointsAndResult();
+        secondPlayer.increasePointsAndResult();
+        secondPlayer.increasePointsAndResult();
         System.out.println(game.getResult());
     }
 }

@@ -15,7 +15,7 @@ public final class Player {
     public Player(String name) {
         this.name = name;
         this.points = Player.BEGINNING_POINTS;
-        this.result = new String();
+        this.changeResult();
     }
 
     void increasePointsAndResult(){
@@ -52,7 +52,7 @@ public final class Player {
     }
 
     enum ScoringSystem{
-        
+
         ZERO_POINTS_RESULT ("Love", 0),
         ONE_POINT_RESULT ("Fifteen", 1),
         TWO_POINTS_RESULT ("Thirty", 2),
@@ -70,8 +70,8 @@ public final class Player {
             return Arrays.stream(ScoringSystem.values())
                     .filter( scoringSystem -> scoringSystem.points == points)
                     .map( scoringSystem -> scoringSystem.result)
-                    .findFirst()
-                    .get();
+                    .findAny()
+                    .orElse("");
         }
     }
 }

@@ -63,7 +63,7 @@ public final class Game {
         Player secondPlayer = new Player("secondPlayer");
         Game game = new Game(firstPlayer, secondPlayer);
         firstPlayer.increasePointsAndResult();
-        secondPlayer.increasePointsAndResult();
+        firstPlayer.increasePointsAndResult();
         secondPlayer.increasePointsAndResult();
         System.out.println(game.getResult());
     }

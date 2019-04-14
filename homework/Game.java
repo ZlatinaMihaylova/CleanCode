@@ -19,10 +19,10 @@ public final class Game {
 
     private String getResult(){
         if (this.checkForWinning()){
-            return Game.WINNING_ANNOTATION + this.getLeadingPlayer().getName();
+            return Game.WINNING_ANNOTATION + this.getLeadingPlayerName();
         }
         if (this.checkForAdvantage()){
-            return Game.ADVANTAGE_ANNOTATION + this.getLeadingPlayer().getName();
+            return Game.ADVANTAGE_ANNOTATION + this.getLeadingPlayerName();
         }
         if (this.arePointsEquals()) {
             return this.getEqualPointsResult();
@@ -51,11 +51,11 @@ public final class Game {
                 || this.secondPlayer.isWinning(this.firstPlayer);
     }
 
-    private Player getLeadingPlayer(){
+    private Player getLeadingPlayerName(){
         if ( this.firstPlayer.hasMorePoints(this.secondPlayer)){
-            return this.firstPlayer;
+            return this.firstPlayer.getName();
         }
-        return this.secondPlayer;
+        return this.secondPlayer.getName();
     }
 
     public static void main(String[] args) {
